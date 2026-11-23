@@ -1,0 +1,15 @@
+[
+  {
+    "subsystem": "source",
+    "id": "s-change",
+    "subject": "J1",
+    "action": "change",
+    "data": {
+      "approved_by": "Client",
+      "kind": "add",
+      "chapter": "ch2"
+    },
+    "at": "2026-12-04",
+    "version": 2
+  }
+]

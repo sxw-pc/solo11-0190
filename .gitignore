@@ -1,0 +1,9 @@
+*.sqlite
+*.db
+demo.json
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+.pytest_cache/

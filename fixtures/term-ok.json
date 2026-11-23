@@ -1,0 +1,38 @@
+[
+  {
+    "subsystem": "term",
+    "id": "t-propose",
+    "subject": "API:safety",
+    "action": "proposal",
+    "data": {
+      "context": "safety",
+      "translation": "安全接口"
+    },
+    "at": "2026-12-01",
+    "version": 1
+  },
+  {
+    "subsystem": "term",
+    "id": "t-vote1",
+    "subject": "API:safety",
+    "action": "vote",
+    "data": {
+      "reviewer": "R1",
+      "translator": "T1"
+    },
+    "at": "2026-12-01",
+    "version": 1
+  },
+  {
+    "subsystem": "term",
+    "id": "t-vote2",
+    "subject": "API:safety",
+    "action": "vote",
+    "data": {
+      "reviewer": "R2",
+      "translator": "T1"
+    },
+    "at": "2026-12-01",
+    "version": 1
+  }
+]

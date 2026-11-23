@@ -1,0 +1,29 @@
+[
+  {
+    "subsystem": "delivery",
+    "id": "d-segment",
+    "subject": "J1",
+    "action": "segment",
+    "data": {
+      "chapter": "ch1",
+      "term_key": "API:safety",
+      "context": "safety",
+      "words": 100
+    },
+    "at": "2026-12-01",
+    "version": 1
+  },
+  {
+    "subsystem": "delivery",
+    "id": "d-review",
+    "subject": "J1",
+    "action": "review",
+    "data": {
+      "reviewer": "R1",
+      "translator": "T1",
+      "approved": true
+    },
+    "at": "2026-12-01",
+    "version": 1
+  }
+]

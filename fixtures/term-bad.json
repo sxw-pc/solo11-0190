@@ -1,0 +1,13 @@
+[
+  {
+    "subsystem": "term",
+    "id": "t-withdraw",
+    "subject": "API:safety",
+    "action": "withdraw",
+    "data": {
+      "reason": "client change"
+    },
+    "at": "2026-12-05",
+    "version": 2
+  }
+]

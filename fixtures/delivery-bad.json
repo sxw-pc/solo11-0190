@@ -1,0 +1,16 @@
+[
+  {
+    "subsystem": "delivery",
+    "id": "d-review2",
+    "subject": "J1",
+    "action": "review",
+    "data": {
+      "reviewer": "R3",
+      "translator": "T1",
+      "approved": false,
+      "disputed_term": "API:safety"
+    },
+    "at": "2026-12-06",
+    "version": 2
+  }
+]

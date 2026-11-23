@@ -1,0 +1,34 @@
+[
+  {
+    "subsystem": "source",
+    "id": "s-contract",
+    "subject": "J1",
+    "action": "contract",
+    "data": {
+      "signers": [
+        "Client"
+      ],
+      "from": "2026-01-01",
+      "to": "2027-12-31",
+      "chapters": [
+        "ch1"
+      ],
+      "rate": 2
+    },
+    "at": "2026-12-01",
+    "version": 1
+  },
+  {
+    "subsystem": "source",
+    "id": "s-chapter",
+    "subject": "J1",
+    "action": "chapter",
+    "data": {
+      "signer": "Client",
+      "chapter": "ch1",
+      "hash": "h1"
+    },
+    "at": "2026-12-01",
+    "version": 1
+  }
+]
