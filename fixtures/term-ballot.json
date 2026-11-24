@@ -1,0 +1,5 @@
+[
+  {"id":"vote-a","reviewer_id":"A-East","approve":true,"term":"injunction","translation":"禁令"},
+  {"id":"vote-b","reviewer_id":"B-West","approve":true,"term":"injunction","translation":"禁令"},
+  {"id":"vote-c","reviewer_id":"C","approve":false,"term":"injunction","translation":"命令"}
+]
