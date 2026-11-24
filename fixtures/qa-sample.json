@@ -1,0 +1,8 @@
+{
+  "delivered_count":10,"limit":0.3,
+  "population":{"high":2,"low":8},
+  "inspections":[
+    {"id":"seg-H1","stratum":"high","defect":true},
+    {"id":"seg-L1","stratum":"low","defect":false}
+  ]
+}
