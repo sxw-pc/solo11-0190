@@ -1,0 +1,4 @@
+[
+  {"id":"timer-a","account":"translator-1","project":"J1","device":"phone","start":9,"end":13},
+  {"id":"timer-b","account":"translator-1","project":"J2","device":"laptop","start":9,"end":13}
+]
