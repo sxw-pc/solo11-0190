@@ -1,0 +1,4 @@
+{
+  "invoices":[{"id":"INV-A","amount":600},{"id":"INV-B","amount":400}],
+  "remittances":[{"id":"bank-1","payer":"Client-C","amount":1000,"invoice_refs":["INV-A","INV-B"]}]
+}
