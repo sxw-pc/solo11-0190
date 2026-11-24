@@ -1,4 +1,87 @@
 {
-  "invoices":[{"id":"INV-A","amount":600},{"id":"INV-B","amount":400}],
-  "remittances":[{"id":"bank-1","payer":"Client-C","amount":1000,"invoice_refs":["INV-A","INV-B"]}]
+  "schema": "termsettle.shared-remittance/v2",
+  "currency": "CNY",
+  "issuers": [
+    {
+      "id": "ISSUER-TS",
+      "legal_name": "译信翻译服务（示例）有限公司",
+      "receivable_accounts": ["ACCT-ISSUER-BOC-0001"]
+    }
+  ],
+  "customers": [
+    {
+      "id": "Client-C",
+      "name": "客户 C",
+      "aliases": ["Client", "C"],
+      "authorized_signers": ["Client", "SIGNER-C-FIN"],
+      "payer_accounts": ["ACCT-CLIENT-C-CMB-6222"]
+    }
+  ],
+  "invoices": [
+    {
+      "id": "INV-A",
+      "amount": 600,
+      "currency": "CNY",
+      "customer": "Client-C",
+      "issuer": "ISSUER-TS",
+      "issuer_account": "ACCT-ISSUER-BOC-0001",
+      "subject": "翻译服务发票 A（源文/J1 结算，不重算译段）"
+    },
+    {
+      "id": "INV-B",
+      "amount": 400,
+      "currency": "CNY",
+      "customer": "Client-C",
+      "issuer": "ISSUER-TS",
+      "issuer_account": "ACCT-ISSUER-BOC-0001",
+      "subject": "翻译服务发票 B"
+    }
+  ],
+  "remittances": [
+    {
+      "id": "bank-1",
+      "kind": "credit",
+      "amount": 1000,
+      "currency": "CNY",
+      "booked_at": "2026-11-20",
+      "value_date": "2026-11-20",
+      "payer": "Client-C",
+      "payer_account": "ACCT-CLIENT-C-CMB-6222",
+      "account": "ACCT-ISSUER-BOC-0001",
+      "invoice_refs": ["INV-A", "INV-B"],
+      "narration": "翻译费 INV-A INV-B",
+      "note": "附言票号只是匹配线索，不是分配授权；同一笔现金不得按附言全额重复扣票"
+    }
+  ],
+  "instructions": [
+    {
+      "id": "instr-full",
+      "bank_ref": "bank-1",
+      "customer": "Client-C",
+      "signed_by": "Client",
+      "signature": "SIG-CLIENT-C-0001",
+      "payer_account": "ACCT-CLIENT-C-CMB-6222",
+      "at": "2026-11-21",
+      "allocations": [
+        {"invoice": "INV-A", "amount": 600},
+        {"invoice": "INV-B", "amount": 400}
+      ],
+      "advances": []
+    },
+    {
+      "id": "instr-advance",
+      "bank_ref": "bank-1",
+      "customer": "Client-C",
+      "signed_by": "Client",
+      "signature": "SIG-CLIENT-C-0002",
+      "payer_account": "ACCT-CLIENT-C-CMB-6222",
+      "at": "2026-11-21",
+      "allocations": [
+        {"invoice": "INV-A", "amount": 600}
+      ],
+      "advances": [
+        {"ref": "ADV-C-NEXTP2", "project": "下期项目 P2 翻译预收", "amount": 400}
+      ]
+    }
+  ]
 }
