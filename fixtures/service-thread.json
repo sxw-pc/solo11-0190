@@ -1,0 +1,8 @@
+{
+  "thread":"T-47","opened_minute":0,"limit":30,
+  "events":[
+    {"id":"in-email","thread":"T-47","direction":"inbound","minute":0,"kind":"client"},
+    {"id":"auto","thread":"T-47","direction":"outbound","minute":2,"kind":"bot-receipt"},
+    {"id":"human","thread":"T-47","direction":"outbound","minute":45,"kind":"substantive"}
+  ]
+}
