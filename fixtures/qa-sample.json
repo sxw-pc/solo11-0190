@@ -1,8 +1,290 @@
 {
-  "delivered_count":10,"limit":0.3,
-  "population":{"high":2,"low":8},
-  "inspections":[
-    {"id":"seg-H1","stratum":"high","defect":true},
-    {"id":"seg-L1","stratum":"low","defect":false}
+  "limit": 0.3,
+  "delivered_count": 10,
+  "population": {
+    "high": 2,
+    "low": 8
+  },
+  "frame": {
+    "issued_at": "2026-11-01T09:00:00+08:00",
+    "segments": [
+      {
+        "id": "seg-H1",
+        "stratum": "high",
+        "case_id": "case-H1",
+        "bilingual": true
+      },
+      {
+        "id": "seg-H2",
+        "stratum": "high",
+        "case_id": "case-H2H8",
+        "bilingual": true
+      },
+      {
+        "id": "seg-L1",
+        "stratum": "low",
+        "case_id": "case-L1",
+        "bilingual": true
+      },
+      {
+        "id": "seg-L2",
+        "stratum": "low",
+        "case_id": "case-L2",
+        "bilingual": true
+      },
+      {
+        "id": "seg-L3",
+        "stratum": "low",
+        "case_id": "case-L3L4",
+        "bilingual": true
+      },
+      {
+        "id": "seg-L4",
+        "stratum": "low",
+        "case_id": "case-L3L4",
+        "bilingual": true
+      },
+      {
+        "id": "seg-L5",
+        "stratum": "low",
+        "case_id": "case-L5",
+        "bilingual": true
+      },
+      {
+        "id": "seg-L6",
+        "stratum": "low",
+        "case_id": "case-L6",
+        "bilingual": true
+      },
+      {
+        "id": "seg-L7",
+        "stratum": "low",
+        "case_id": "case-L7",
+        "bilingual": true
+      },
+      {
+        "id": "seg-L8",
+        "stratum": "low",
+        "case_id": "case-H2H8",
+        "bilingual": true
+      }
+    ]
+  },
+  "plans": [
+    {
+      "plan_id": "PLAN-SRS-2026-11-02",
+      "design": "srs",
+      "issued_at": "2026-11-02T10:00:00+08:00",
+      "issued_by": "QA Manager",
+      "client_signed_at": "2026-11-02T09:30:00+08:00",
+      "client_signature": "client-signature-srs-7f3a",
+      "frame_issued_at": "2026-11-01T09:00:00+08:00",
+      "sample_size": 2,
+      "sample": [
+        "seg-H1",
+        "seg-L1"
+      ],
+      "strata": null,
+      "inclusion_probabilities": {
+        "seg-H1": 0.2,
+        "seg-H2": 0.2,
+        "seg-L1": 0.2,
+        "seg-L2": 0.2,
+        "seg-L3": 0.2,
+        "seg-L4": 0.2,
+        "seg-L5": 0.2,
+        "seg-L6": 0.2,
+        "seg-L7": 0.2,
+        "seg-L8": 0.2
+      },
+      "frame": {
+        "issued_at": "2026-11-01T09:00:00+08:00",
+        "segments": [
+          {
+            "id": "seg-H1",
+            "stratum": "high",
+            "case_id": "case-H1",
+            "bilingual": true
+          },
+          {
+            "id": "seg-H2",
+            "stratum": "high",
+            "case_id": "case-H2H8",
+            "bilingual": true
+          },
+          {
+            "id": "seg-L1",
+            "stratum": "low",
+            "case_id": "case-L1",
+            "bilingual": true
+          },
+          {
+            "id": "seg-L2",
+            "stratum": "low",
+            "case_id": "case-L2",
+            "bilingual": true
+          },
+          {
+            "id": "seg-L3",
+            "stratum": "low",
+            "case_id": "case-L3L4",
+            "bilingual": true
+          },
+          {
+            "id": "seg-L4",
+            "stratum": "low",
+            "case_id": "case-L3L4",
+            "bilingual": true
+          },
+          {
+            "id": "seg-L5",
+            "stratum": "low",
+            "case_id": "case-L5",
+            "bilingual": true
+          },
+          {
+            "id": "seg-L6",
+            "stratum": "low",
+            "case_id": "case-L6",
+            "bilingual": true
+          },
+          {
+            "id": "seg-L7",
+            "stratum": "low",
+            "case_id": "case-L7",
+            "bilingual": true
+          },
+          {
+            "id": "seg-L8",
+            "stratum": "low",
+            "case_id": "case-H2H8",
+            "bilingual": true
+          }
+        ]
+      },
+      "issued_digest": "aad6f3d43e8ad6219047e759e76d06e73c7c274522ba996b0b0100e91fcccb97",
+      "limit": 0.3
+    },
+    {
+      "plan_id": "PLAN-STRAT-2026-11-02",
+      "design": "stratified",
+      "issued_at": "2026-11-02T10:00:00+08:00",
+      "issued_by": "QA Manager",
+      "client_signed_at": "2026-11-02T09:30:00+08:00",
+      "client_signature": "client-signature-strat-91bc",
+      "frame_issued_at": "2026-11-01T09:00:00+08:00",
+      "sample_size": 2,
+      "sample": [
+        "seg-H1",
+        "seg-L1"
+      ],
+      "strata": {
+        "high": {
+          "population": 2,
+          "sample_size": 1
+        },
+        "low": {
+          "population": 8,
+          "sample_size": 1
+        }
+      },
+      "inclusion_probabilities": {
+        "seg-H1": 0.5,
+        "seg-H2": 0.5,
+        "seg-L1": 0.125,
+        "seg-L2": 0.125,
+        "seg-L3": 0.125,
+        "seg-L4": 0.125,
+        "seg-L5": 0.125,
+        "seg-L6": 0.125,
+        "seg-L7": 0.125,
+        "seg-L8": 0.125
+      },
+      "frame": {
+        "issued_at": "2026-11-01T09:00:00+08:00",
+        "segments": [
+          {
+            "id": "seg-H1",
+            "stratum": "high",
+            "case_id": "case-H1",
+            "bilingual": true
+          },
+          {
+            "id": "seg-H2",
+            "stratum": "high",
+            "case_id": "case-H2H8",
+            "bilingual": true
+          },
+          {
+            "id": "seg-L1",
+            "stratum": "low",
+            "case_id": "case-L1",
+            "bilingual": true
+          },
+          {
+            "id": "seg-L2",
+            "stratum": "low",
+            "case_id": "case-L2",
+            "bilingual": true
+          },
+          {
+            "id": "seg-L3",
+            "stratum": "low",
+            "case_id": "case-L3L4",
+            "bilingual": true
+          },
+          {
+            "id": "seg-L4",
+            "stratum": "low",
+            "case_id": "case-L3L4",
+            "bilingual": true
+          },
+          {
+            "id": "seg-L5",
+            "stratum": "low",
+            "case_id": "case-L5",
+            "bilingual": true
+          },
+          {
+            "id": "seg-L6",
+            "stratum": "low",
+            "case_id": "case-L6",
+            "bilingual": true
+          },
+          {
+            "id": "seg-L7",
+            "stratum": "low",
+            "case_id": "case-L7",
+            "bilingual": true
+          },
+          {
+            "id": "seg-L8",
+            "stratum": "low",
+            "case_id": "case-H2H8",
+            "bilingual": true
+          }
+        ]
+      },
+      "issued_digest": "7ed3ebf744d86106debaecdb1f6b585aac4ce899207d60bef2abb2bc4443fc05",
+      "limit": 0.3
+    }
+  ],
+  "observations": [
+    {
+      "id": "seg-H1",
+      "stratum": "high",
+      "defect": true,
+      "inspected_at": "2026-11-03T10:00:00+08:00",
+      "inspector": "Inspector A",
+      "inspection_signature": "inspector-sig-H1"
+    },
+    {
+      "id": "seg-L1",
+      "stratum": "low",
+      "defect": false,
+      "inspected_at": "2026-11-03T11:00:00+08:00",
+      "inspector": "Inspector B",
+      "inspection_signature": "inspector-sig-L1"
+    }
   ]
 }
