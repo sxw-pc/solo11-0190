@@ -1,5 +1,38 @@
 [
-  {"id":"vote-a","reviewer_id":"A-East","approve":true,"term":"injunction","translation":"禁令"},
-  {"id":"vote-b","reviewer_id":"B-West","approve":true,"term":"injunction","translation":"禁令"},
-  {"id":"vote-c","reviewer_id":"C","approve":false,"term":"injunction","translation":"命令"}
+  {
+    "id": "vote-a",
+    "reviewer_id": "A-East",
+    "approve": true,
+    "term": "injunction",
+    "translation": "禁令",
+    "at": "2026-11-18",
+    "signed_by": "A-East",
+    "signature": "offline-signature:A-East:2026-11-18:9f31ac",
+    "signature_ref": "evidence/ballot-signatures/vote-a.json",
+    "payload_sha256": "a5ed81a56d94fdcef15a0e41844afe4226722b1175e253084590a6bdc033dec2"
+  },
+  {
+    "id": "vote-b",
+    "reviewer_id": "B-West",
+    "approve": true,
+    "term": "injunction",
+    "translation": "禁令",
+    "at": "2026-11-18",
+    "signed_by": "B-West",
+    "signature": "offline-signature:B-West:2026-11-18:44bd70",
+    "signature_ref": "evidence/ballot-signatures/vote-b.json",
+    "payload_sha256": "7f2e8122cbd23ea9ac577f8bc88053c807fe9564afd643131e3d7ef99a065622"
+  },
+  {
+    "id": "vote-c",
+    "reviewer_id": "C",
+    "approve": false,
+    "term": "injunction",
+    "translation": "命令",
+    "at": "2026-11-19",
+    "signed_by": "C",
+    "signature": "offline-signature:C:2026-11-19:c07e51",
+    "signature_ref": "evidence/ballot-signatures/vote-c.json",
+    "payload_sha256": "d15a1562fe0b9eb6daca986b139f47a51033d6af4df84642fa1bb985f169b42c"
+  }
 ]
