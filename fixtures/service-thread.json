@@ -1,8 +1,509 @@
 {
-  "thread":"T-47","opened_minute":0,"limit":30,
-  "events":[
-    {"id":"in-email","thread":"T-47","direction":"inbound","minute":0,"kind":"client"},
-    {"id":"auto","thread":"T-47","direction":"outbound","minute":2,"kind":"bot-receipt"},
-    {"id":"human","thread":"T-47","direction":"outbound","minute":45,"kind":"substantive"}
-  ]
+  "schema": "termsettle.service-thread/2",
+  "thread": "T-47",
+  "ticket_id": "T-47",
+  "opened_minute": 0,
+  "limit": 30,
+  "customer": "C-ACME",
+  "customer_contact": "editor@acme.example",
+  "opened_at": "2026-11-24T09:00:00+08:00",
+  "clock_policy": {
+    "desk_timezone": "+08:00",
+    "gateway_timezone": "UTC",
+    "client_mailbox_timezone": "+08:00",
+    "tolerance_seconds": 90
+  },
+  "question": {
+    "dispute_key": "D-T47-API-safety-zh",
+    "term_key": "API:safety",
+    "language_pair": "en>zh",
+    "context": "API error classification chapter",
+    "asked_name": "safety",
+    "candidate_translations": ["安全", "安全性", "安全分类", "安全接口"]
+  },
+  "governing_contract": "human-substantive-zh",
+  "contracts": [
+    {
+      "contract_id": "appendix-a-auto-diagnostic",
+      "title": "附件A：客户预先认可的自动诊断回复可计首响",
+      "limit_minutes": 30,
+      "auto_diagnostic_counts_as_first_response": true,
+      "customer_preacknowledged_diagnostics": true,
+      "preacknowledgment_ref": "signed/msa-appendix-a-2026.pdf#diag-optin",
+      "approved_diagnostic_codes": ["DG-API-SAFETY-01"],
+      "pause_allowed": true,
+      "authorized_humans": ["R1"],
+      "approved_auto_senders": ["auto-diagnostic-bot"]
+    },
+    {
+      "contract_id": "human-substantive-zh",
+      "title": "主合同第7条：须由授权人工给出具体译名实质答复",
+      "limit_minutes": 30,
+      "human_substantive_required": true,
+      "auto_diagnostic_counts_as_first_response": false,
+      "receipt_only_does_not_count": true,
+      "pause_allowed": true,
+      "authorized_humans": ["R1"],
+      "approved_auto_senders": []
+    }
+  ],
+  "diagnostic_catalog": {
+    "DG-API-SAFETY-01": {
+      "term_key": "API:safety",
+      "dispute_key": "D-T47-API-safety-zh",
+      "preapproved": true,
+      "guidance": "确认 safety 在错误分类语境修饰错误类别而非接口等级；适用预核准规则 A-3。",
+      "handling_steps": ["confirm modified noun", "apply rule A-3", "log context"]
+    }
+  },
+  "events": [
+    {
+      "id": "in-email",
+      "thread": "T-47",
+      "direction": "inbound",
+      "minute": 0,
+      "at": "2026-11-24T09:00:00+08:00",
+      "channel": "email",
+      "kind": "client",
+      "message_id": "<T47-in-0@mail.acme.example>",
+      "from": "editor@acme.example",
+      "to": "desk@termsettle.example",
+      "customer": "C-ACME",
+      "dispute_key": "D-T47-API-safety-zh",
+      "subject": "Terminology dispute T-47: API safety 的具体译名",
+      "body": "术语争议：API 错误分类章节中的 safety 应译为“安全”“安全性”还是“安全分类”？请就具体译名给出实质答复。"
+    },
+    {
+      "id": "auto",
+      "thread": "T-47",
+      "direction": "outbound",
+      "minute": 2,
+      "at": "2026-11-24T09:02:00+08:00",
+      "channel": "email",
+      "kind": "bot-receipt",
+      "message_id": "<T47-auto-2@desk.termsettle.example>",
+      "from": "auto-diagnostic-bot@termsettle.example",
+      "sender": "auto-diagnostic-bot",
+      "author_type": "bot",
+      "authorized": true,
+      "to": "editor@acme.example",
+      "recipient": "editor@acme.example",
+      "customer": "C-ACME",
+      "dispute_key": "D-T47-API-safety-zh",
+      "delivered": true,
+      "client_received_minute": 2,
+      "delivery_receipt_id": "rcpt-auto-client",
+      "body": "术语争议已受理 T-47（自动收讫）。自动诊断 DG-API-SAFETY-01：已匹配问题 API:safety。在 API 错误分类语境，预核准处理指引 A-3 要求先确认 safety 修饰的是错误类别还是接口等级，再套用对应术语行。本邮件包含经贵司预先认可的自动诊断处理指引，但并非人工就具体译名作出的最终裁定。"
+    },
+    {
+      "id": "human",
+      "thread": "T-47",
+      "direction": "outbound",
+      "minute": 45,
+      "at": "2026-11-24T09:45:00+08:00",
+      "channel": "email",
+      "kind": "substantive",
+      "message_id": "<T47-human-45@desk.termsettle.example>",
+      "from": "R1@termsettle.example",
+      "sender": "R1",
+      "author_type": "human",
+      "authorized": true,
+      "to": "editor@acme.example",
+      "recipient": "editor@acme.example",
+      "customer": "C-ACME",
+      "dispute_key": "D-T47-API-safety-zh",
+      "delivered": true,
+      "client_received_minute": 45,
+      "delivery_receipt_id": "rcpt-human-client",
+      "term_answer": {"term_key": "API:safety", "translation": "安全分类", "decided_by": "R1"},
+      "body": "R1 人工裁定：在 API 错误分类语境，safety classification 指安全分类，故该术语行的标准译法：安全分类（例如 safety category = 安全类别）。"
+    }
+  ],
+  "delivery_receipts": [
+    {
+      "id": "rcpt-auto-accept",
+      "message_id": "auto",
+      "type": "gateway",
+      "status": "accepted",
+      "minute": 2,
+      "at_utc": "2026-11-24T01:02:00Z",
+      "recipient": "editor@acme.example",
+      "note": "attempt accepted by outbound gateway only; not proof of inbox delivery"
+    },
+    {
+      "id": "gw-auto-detail",
+      "message_id": "auto",
+      "type": "gateway_detail",
+      "status": "delivered",
+      "minute": 2,
+      "at": "2026-11-24T01:02:03Z",
+      "recipient": "editor@acme.example",
+      "verified": true,
+      "substantive_translation_content": false,
+      "human_authored": false,
+      "term_decision_present": false,
+      "contains_diagnostic_code": "DG-API-SAFETY-01",
+      "note": "网关 MIME/内容明细：2 分钟邮件为自动收讫+诊断模板，不含人工具体译名裁定"
+    },
+    {
+      "id": "rcpt-auto-client",
+      "message_id": "auto",
+      "type": "client_inbox",
+      "status": "received",
+      "minute": 2,
+      "at": "2026-11-24T09:02:20+08:00",
+      "recipient": "editor@acme.example",
+      "verified": true,
+      "signature_valid": true,
+      "client_side": true,
+      "inbox_message_id": "INBOX-99821",
+      "evidence": "client-mailbox export: T47-auto-2 visible in inbox at 09:02 +08"
+    },
+    {
+      "id": "rcpt-human-client",
+      "message_id": "human",
+      "type": "client_inbox",
+      "status": "received",
+      "minute": 45,
+      "at": "2026-11-24T09:45:10+08:00",
+      "recipient": "editor@acme.example",
+      "verified": true,
+      "signature_valid": true,
+      "client_side": true,
+      "inbox_message_id": "INBOX-99910"
+    }
+  ],
+  "holds": [],
+  "review_dispositions": [
+    {
+      "contract": "appendix-a-auto-diagnostic",
+      "first_response_id": "auto",
+      "elapsed": 2,
+      "met": true,
+      "basis": "matched preapproved diagnostic DG-API-SAFETY-01 + client inbox receipt at minute 2"
+    },
+    {
+      "contract": "human-substantive-zh",
+      "first_response_id": "human",
+      "elapsed": 45,
+      "met": false,
+      "overdue_minutes": 15,
+      "basis": "gateway detail proves minute-2 message is an automated receipt without concrete translation; human answer delivered at 45"
+    }
+  ],
+  "scenarios": [
+    {
+      "name": "portal-repost-merge",
+      "title": "同一争议门户重投：归并到首封邮件时钟，不另开较晚时钟",
+      "thread": "T-61",
+      "opened_minute": 0,
+      "limit": 30,
+      "customer": "C-6",
+      "opened_at": "2026-11-24T10:00:00+08:00",
+      "contract": "human-substantive-zh",
+      "question": {"dispute_key": "D61", "term_key": "loc:register", "asked_name": "register"},
+      "events": [
+        {"id": "s1-in-email", "thread": "T-61", "direction": "inbound", "minute": 0,
+         "at": "2026-11-24T10:00:00+08:00", "channel": "email", "kind": "client",
+         "message_id": "<61-in@mail>", "customer": "C-6", "dispute_key": "D61",
+         "fingerprint": "fp61", "body": "register 在登录语境应译“注册”还是“登记”？"},
+        {"id": "s1-in-portal", "thread": "T-61", "direction": "inbound", "minute": 4,
+         "at": "2026-11-24T10:04:00+08:00", "channel": "portal", "kind": "client",
+         "conversation_id": "portal-session-P-61", "customer": "C-6",
+         "dispute_key": "D61", "fingerprint": "fp61", "duplicate_of": "s1-in-email",
+         "body": "register 在登录语境应译“注册”还是“登记”？（门户重投）"},
+        {"id": "s1-reply", "thread": "T-61", "direction": "outbound", "minute": 16,
+         "at": "2026-11-24T10:16:00+08:00", "channel": "email", "kind": "substantive",
+         "sender": "R1", "author_type": "human", "authorized": true,
+         "recipient": "c6@example", "customer": "C-6", "dispute_key": "D61",
+         "term_answer": {"term_key": "loc:register", "translation": "注册"},
+         "body": "标准译法：注册（账号创建语境）。"}
+      ],
+      "delivery_receipts": [
+        {"id": "s1-rcpt-reply", "message_id": "s1-reply", "type": "client_inbox",
+         "status": "received", "minute": 17, "verified": true, "client_side": true,
+         "recipient": "c6@example"}
+      ],
+      "expected": {"ticket_count_for_d61": 1, "opened_minute": 0,
+                   "first_response_id": "s1-reply", "response_minute": 17,
+                   "elapsed": 17, "met": true, "naive_portal_elapsed": 13}
+    },
+    {
+      "name": "same-customer-other-dispute",
+      "title": "相同客户的不同争议不得合并",
+      "thread": "T-62",
+      "opened_minute": 10,
+      "limit": 30,
+      "customer": "C-6",
+      "opened_at": "2026-11-24T10:10:00+08:00",
+      "contract": "human-substantive-zh",
+      "question": {"dispute_key": "D62", "term_key": "tone:formal", "asked_name": "you"},
+      "events": [
+        {"id": "s2-in-other", "thread": "T-62", "direction": "inbound", "minute": 10,
+         "at": "2026-11-24T10:10:00+08:00", "channel": "portal", "kind": "client",
+         "customer": "C-6", "dispute_key": "D62",
+         "body": "另一争议：合同语气中 you 应译“贵方”还是“您”？"},
+        {"id": "s2-orphan", "thread": "WEB-7788", "direction": "inbound", "minute": 11,
+         "at": "2026-11-24T10:11:00+08:00", "channel": "portal", "kind": "client",
+         "customer": "C-6",
+         "body": "没有争议键也没有归并链接的普通追问，不能凭客户身份并入 T-61。"},
+        {"id": "s2-reply", "thread": "T-62", "direction": "outbound", "minute": 22,
+         "at": "2026-11-24T10:22:00+08:00", "channel": "portal", "kind": "substantive",
+         "sender": "R1", "author_type": "human", "authorized": true,
+         "customer": "C-6", "dispute_key": "D62",
+         "term_answer": {"term_key": "tone:formal", "translation": "贵方"},
+         "body": "标准译法：贵方（合同正式语气）。"}
+      ],
+      "delivery_receipts": [
+        {"id": "s2-rcpt", "message_id": "s2-reply", "type": "client_inbox",
+         "status": "received", "minute": 22, "verified": true, "client_side": true}
+      ],
+      "expected": {"must_not_merge_with": "T-61", "opened_minute": 10,
+                   "elapsed": 12, "met": true}
+    },
+    {
+      "name": "wrong-delivery-retry",
+      "title": "错误投递重试：尝试与伪造回执不停表，成功送达才停表",
+      "thread": "T-63",
+      "opened_minute": 0,
+      "limit": 30,
+      "customer": "C-63",
+      "customer_contact": "client@acme.example",
+      "opened_at": "2026-11-24T11:00:00+08:00",
+      "contract": "human-substantive-zh",
+      "question": {"dispute_key": "D63", "term_key": "fin:charge", "asked_name": "charge"},
+      "events": [
+        {"id": "s3-in", "thread": "T-63", "direction": "inbound", "minute": 0,
+         "at": "2026-11-24T11:00:00+08:00", "channel": "email", "kind": "client",
+         "customer": "C-63", "dispute_key": "D63", "body": "charge 在账单语境译“收费”还是“扣款”？"},
+        {"id": "s3-attempt1", "thread": "T-63", "direction": "outbound", "minute": 6,
+         "at": "2026-11-24T11:06:00+08:00", "channel": "email", "kind": "attempt",
+         "sender": "R1", "author_type": "human", "authorized": true,
+         "recipient": "old-vendor@forward.example", "customer": "C-63",
+         "dispute_key": "D63",
+         "term_answer": {"term_key": "fin:charge", "translation": "扣款"},
+         "body": "标准译法：扣款（账单语境）。"},
+        {"id": "s3-retry", "thread": "T-63", "direction": "outbound", "minute": 9,
+         "at": "2026-11-24T11:09:00+08:00", "channel": "email", "kind": "substantive",
+         "sender": "R1", "author_type": "human", "authorized": true,
+         "recipient": "client@acme.example", "customer": "C-63",
+         "dispute_key": "D63",
+         "term_answer": {"term_key": "fin:charge", "translation": "扣款"},
+         "body": "重发：标准译法 charge 在账单语境为“扣款”。"}
+      ],
+      "delivery_receipts": [
+        {"id": "s3-rcpt-accept1", "message_id": "s3-attempt1", "type": "gateway",
+         "status": "accepted", "minute": 6, "recipient": "old-vendor@forward.example"},
+        {"id": "s3-rcpt-bounce1", "message_id": "s3-attempt1", "type": "gateway",
+         "status": "bounced", "minute": 7, "verified": true,
+         "recipient": "old-vendor@forward.example"},
+        {"id": "s3-rcpt-forged", "message_id": "s3-attempt1", "type": "client_inbox",
+         "status": "received", "minute": 6, "verified": false,
+         "signature_valid": false, "recipient": "client@acme.example",
+         "note": "伪造/签名失败的有利回执，必须排除"},
+        {"id": "s3-rcpt-retry-gw", "message_id": "s3-retry", "type": "gateway_detail",
+         "status": "delivered", "minute": 10, "verified": true,
+         "recipient": "client@acme.example"},
+        {"id": "s3-rcpt-retry-client", "message_id": "s3-retry", "type": "client_inbox",
+         "status": "received", "minute": 10, "verified": true, "client_side": true,
+         "recipient": "client@acme.example"}
+      ],
+      "expected": {"first_response_id": "s3-retry", "response_minute": 10,
+                   "elapsed": 10, "met": true,
+                   "rejected_receipts": ["s3-rcpt-forged", "s3-rcpt-bounce1"]}
+    },
+    {
+      "name": "pause-valid-boundary",
+      "title": "客户签认补件暂停跨越30分钟边界：仅扣减实际收到补件请求后的签认区间",
+      "thread": "T-64",
+      "opened_minute": 0,
+      "limit": 30,
+      "customer": "C-64",
+      "opened_at": "2026-11-24T12:00:00+08:00",
+      "contract": "human-substantive-zh",
+      "question": {"dispute_key": "D64", "term_key": "med:dose", "asked_name": "dose"},
+      "events": [
+        {"id": "s4-in", "thread": "T-64", "direction": "inbound", "minute": 0,
+         "channel": "email", "kind": "client", "customer": "C-64", "dispute_key": "D64",
+         "body": "dose 在说明书中译“剂量”还是“用量”？"},
+        {"id": "s4-request", "thread": "T-64", "direction": "outbound", "minute": 8,
+         "channel": "email", "kind": "supplement-request", "sender": "R1",
+         "author_type": "human", "authorized": true, "customer": "C-64",
+         "body": "请补充该术语所在说明书段落与目标读者，以便裁定 dose 译名。"},
+        {"id": "s4-answer", "thread": "T-64", "direction": "outbound", "minute": 48,
+         "channel": "email", "kind": "substantive", "sender": "R1",
+         "author_type": "human", "authorized": true, "customer": "C-64",
+         "term_answer": {"term_key": "med:dose", "translation": "剂量"},
+         "body": "标准译法：剂量（药品说明书固定术语）。"}
+      ],
+      "delivery_receipts": [
+        {"id": "s4-rcpt-request", "message_id": "s4-request", "type": "client_inbox",
+         "status": "received", "minute": 9, "verified": true, "client_side": true},
+        {"id": "s4-rcpt-answer", "message_id": "s4-answer", "type": "client_inbox",
+         "status": "received", "minute": 48, "verified": true, "client_side": true}
+      ],
+      "holds": [
+        {"id": "hold-64", "ticket": "T-64", "type": "supplement",
+         "request_message_id": "s4-request", "start": 20, "end": 40,
+         "signed": true, "signed_by": "C-64-editor", "signature_verified": true,
+         "signed_at_minute": 19,
+         "document": "signed/hold-64.pdf"}
+      ],
+      "expected": {"wall_elapsed": 48, "paused_minutes": 20, "elapsed": 28,
+                   "met": true, "crosses_limit_minute": 30}
+    },
+    {
+      "name": "pause-unsigned",
+      "title": "未经客户签认的暂停不扣减",
+      "thread": "T-65a",
+      "opened_minute": 0,
+      "limit": 30,
+      "customer": "C-65",
+      "contract": "human-substantive-zh",
+      "events": [
+        {"id": "s5-in", "thread": "T-65a", "direction": "inbound", "minute": 0,
+         "kind": "client", "customer": "C-65"},
+        {"id": "s5-request", "thread": "T-65a", "direction": "outbound", "minute": 8,
+         "kind": "supplement-request", "sender": "R1", "author_type": "human",
+         "authorized": true, "body": "请补上下文。"},
+        {"id": "s5-answer", "thread": "T-65a", "direction": "outbound", "minute": 40,
+         "kind": "substantive", "sender": "R1", "author_type": "human",
+         "authorized": true,
+         "term_answer": {"term_key": "t", "translation": "译名X"},
+         "body": "标准译法：译名X。"}
+      ],
+      "delivery_receipts": [
+        {"id": "s5-rcpt-req", "message_id": "s5-request", "type": "client_inbox",
+         "status": "received", "minute": 9, "verified": true},
+        {"id": "s5-rcpt-ans", "message_id": "s5-answer", "type": "client_inbox",
+         "status": "received", "minute": 40, "verified": true}
+      ],
+      "holds": [
+        {"id": "hold-65a", "ticket": "T-65a", "request_message_id": "s5-request",
+         "start": 10, "end": 30, "signed": false}
+      ],
+      "expected": {"paused_minutes": 0, "elapsed": 40, "met": false,
+                   "overdue_minutes": 10}
+    },
+    {
+      "name": "pause-request-not-received",
+      "title": "补件请求未实际送达，暂停不扣减",
+      "thread": "T-65b",
+      "opened_minute": 0,
+      "limit": 30,
+      "customer": "C-65",
+      "contract": "human-substantive-zh",
+      "events": [
+        {"id": "s6-in", "thread": "T-65b", "direction": "inbound", "minute": 0,
+         "kind": "client", "customer": "C-65"},
+        {"id": "s6-request", "thread": "T-65b", "direction": "outbound", "minute": 8,
+         "kind": "supplement-request", "sender": "R1", "author_type": "human",
+         "authorized": true, "body": "请补上下文。"},
+        {"id": "s6-answer", "thread": "T-65b", "direction": "outbound", "minute": 40,
+         "kind": "substantive", "sender": "R1", "author_type": "human",
+         "authorized": true,
+         "term_answer": {"term_key": "t", "translation": "译名Y"},
+         "body": "标准译法：译名Y。"}
+      ],
+      "delivery_receipts": [
+        {"id": "s6-rcpt-req-bounce", "message_id": "s6-request", "type": "gateway",
+         "status": "bounced", "minute": 9, "verified": true},
+        {"id": "s6-rcpt-ans", "message_id": "s6-answer", "type": "client_inbox",
+         "status": "received", "minute": 40, "verified": true}
+      ],
+      "holds": [
+        {"id": "hold-65b", "ticket": "T-65b", "request_message_id": "s6-request",
+         "start": 10, "end": 30, "signed": true, "signed_by": "C-65"}
+      ],
+      "expected": {"paused_minutes": 0, "elapsed": 40, "met": false,
+                   "overdue_minutes": 10}
+    },
+    {
+      "name": "pause-contract-forbidden",
+      "title": "合同不允许暂停时，即使签认且送达也不扣减",
+      "thread": "T-65c",
+      "opened_minute": 0,
+      "limit": 30,
+      "customer": "C-65",
+      "contract": "human-no-pause",
+      "events": [
+        {"id": "s7-in", "thread": "T-65c", "direction": "inbound", "minute": 0,
+         "kind": "client", "customer": "C-65"},
+        {"id": "s7-request", "thread": "T-65c", "direction": "outbound", "minute": 8,
+         "kind": "supplement-request", "sender": "R1", "author_type": "human",
+         "authorized": true, "body": "请补上下文。"},
+        {"id": "s7-answer", "thread": "T-65c", "direction": "outbound", "minute": 40,
+         "kind": "substantive", "sender": "R1", "author_type": "human",
+         "authorized": true,
+         "term_answer": {"term_key": "t", "translation": "译名Z"},
+         "body": "标准译法：译名Z。"}
+      ],
+      "delivery_receipts": [
+        {"id": "s7-rcpt-req", "message_id": "s7-request", "type": "client_inbox",
+         "status": "received", "minute": 9, "verified": true},
+        {"id": "s7-rcpt-ans", "message_id": "s7-answer", "type": "client_inbox",
+         "status": "received", "minute": 40, "verified": true}
+      ],
+      "holds": [
+        {"id": "hold-65c", "ticket": "T-65c", "request_message_id": "s7-request",
+         "start": 10, "end": 30, "signed": true, "signed_by": "C-65"}
+      ],
+      "expected": {"paused_minutes": 0, "elapsed": 40, "met": false,
+                   "overdue_minutes": 10}
+    }
+  ],
+  "late_receipt_revision": {
+    "name": "late-gateway-receipt",
+    "thread": "T-66",
+    "opened_minute": 0,
+    "limit": 30,
+    "customer": "C-66",
+    "opened_at": "2026-11-24T13:00:00+08:00",
+    "contract": "appendix-a-auto-diagnostic",
+    "question": {"dispute_key": "D66", "term_key": "cloud:region", "asked_name": "region"},
+    "events": [
+      {"id": "s8-in", "thread": "T-66", "direction": "inbound", "minute": 0,
+       "at": "2026-11-24T13:00:00+08:00", "kind": "client", "customer": "C-66",
+       "dispute_key": "D66", "body": "region 在云文档中译“区域”还是“地区”？"},
+      {"id": "s8-auto", "thread": "T-66", "direction": "outbound", "minute": 2,
+       "at": "2026-11-24T13:02:00+08:00", "kind": "bot-receipt",
+       "sender": "auto-diagnostic-bot", "author_type": "bot", "authorized": true,
+       "customer": "C-66", "dispute_key": "D66",
+       "body": "自动诊断 DG-CLOUD-REGION-01：已匹配 cloud:region，预核准指引 C-2 要求区分地理区域与云区域。"},
+      {"id": "s8-human", "thread": "T-66", "direction": "outbound", "minute": 45,
+       "at": "2026-11-24T13:45:00+08:00", "kind": "substantive", "sender": "R1",
+       "author_type": "human", "authorized": true, "customer": "C-66",
+       "term_answer": {"term_key": "cloud:region", "translation": "区域"},
+       "body": "标准译法：区域（云区域）。"}
+    ],
+    "diagnostic_catalog": {
+      "DG-CLOUD-REGION-01": {"term_key": "cloud:region", "preapproved": true,
+                             "guidance": "区分地理 area 与云 region。"}
+    },
+    "initial_receipts": [
+      {"id": "s8-gw-accept", "message_id": "s8-auto", "type": "gateway",
+       "status": "accepted", "minute": 2, "verified": true},
+      {"id": "s8-rcpt-human", "message_id": "s8-human", "type": "client_inbox",
+       "status": "received", "minute": 45, "verified": true, "client_side": true}
+    ],
+    "late_receipt": {
+      "id": "s8-gw-late-delivery",
+      "message_id": "s8-auto",
+      "type": "client_inbox",
+      "status": "received",
+      "minute": 2,
+      "at": "2026-11-24T05:02:05Z",
+      "ingested_minute": 58,
+      "ingested_at": "2026-11-24T13:58:00+08:00",
+      "recipient": "c66@example",
+      "verified": true,
+      "signature_valid": true,
+      "client_side": true,
+      "note": "迟到的客户端送达回执：证明 minute-2 自动诊断当时已入客户收件箱"
+    },
+    "expected_initial": {"revision": 1, "first_response_id": "s8-human",
+                         "elapsed": 45, "met": false},
+    "expected_revised": {"revision": 2, "first_response_id": "s8-auto",
+                         "elapsed": 2, "met": true}
+  }
 }
