@@ -1,0 +1,5 @@
+[
+  {"upload_id":"a1","recorder":"main","samples":"0-95999","codec":"pcm"},
+  {"upload_id":"a2","recorder":"main","samples":"96000-191999","codec":"pcm"},
+  {"upload_id":"a3","recorder":"relay","samples":"96000-191999","codec":"aac"}
+]
