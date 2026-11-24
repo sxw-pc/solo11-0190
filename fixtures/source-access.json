@@ -1,0 +1,8 @@
+{
+  "packet":"SRC-47",
+  "known_accounts":["translator-A"],
+  "events":[
+    {"id":"e1","account":"translator-A","packet":"SRC-47","action":"read","at":"2026-04-01T09:00:00Z"},
+    {"id":"e2","account":"review-proxy","packet":"SRC-47","action":"download","at":"2026-04-01T10:00:00Z"}
+  ]
+}
