@@ -1,0 +1,8 @@
+{
+  "manifest": ["source-main", "annex-7"],
+  "events": [
+    {"id":"dispatch","packet":"P1","location":"translator","at":10,"received_at":10},
+    {"id":"annex-review","packet":"P1","item":"annex-7","location":"independent-reviewer","at":12,"received_at":14},
+    {"id":"packet-return","packet":"P1","location":"client","at":18,"received_at":18}
+  ]
+}
