@@ -1,8 +1,150 @@
 {
-  "packet":"SRC-47",
-  "known_accounts":["translator-A"],
-  "events":[
-    {"id":"e1","account":"translator-A","packet":"SRC-47","action":"read","at":"2026-04-01T09:00:00Z"},
-    {"id":"e2","account":"review-proxy","packet":"SRC-47","action":"download","at":"2026-04-01T10:00:00Z"}
-  ]
+  "packet": "SRC-47",
+  "evidence_note": "evidence is the baseline (delegated) issuance chain; each scenario's evidence overlays it key by key",
+  "known_accounts": ["translator-A"],
+  "events": [
+    {"id": "e1", "account": "translator-A", "packet": "SRC-47", "action": "read", "at": "2026-04-01T09:00:00Z"},
+    {"id": "e2", "account": "review-proxy", "packet": "SRC-47", "action": "download", "at": "2026-04-01T10:00:00Z"}
+  ],
+  "evidence": {
+    "delegations": [
+      {
+        "id": "del-47",
+        "packet": "SRC-47",
+        "account": "review-proxy",
+        "approved_by": "Client",
+        "issued_at": "2026-03-30T08:00:00Z",
+        "from": "2026-04-01T08:00:00Z",
+        "to": "2026-04-03T18:00:00Z",
+        "versions": ["v7"]
+      }
+    ],
+    "tokens": [
+      {
+        "id": "tok-47",
+        "account": "review-proxy",
+        "delegation": "del-47",
+        "issued_at": "2026-04-01T08:05:00Z",
+        "expires_at": "2026-04-03T18:00:00Z"
+      }
+    ],
+    "devices": [
+      {
+        "id": "dev-reviewer-1",
+        "account": "review-proxy",
+        "site": "office-hk",
+        "registered_at": "2026-03-20T00:00:00Z",
+        "status": "active"
+      }
+    ],
+    "sessions": [
+      {
+        "id": "ses-47",
+        "account": "review-proxy",
+        "token": "tok-47",
+        "device": "dev-reviewer-1",
+        "started_at": "2026-04-01T08:10:00Z",
+        "ended_at": "2026-04-01T12:00:00Z"
+      }
+    ],
+    "versions": [
+      {"id": "v7", "packet": "SRC-47", "released_at": "2026-03-25T00:00:00Z"}
+    ],
+    "receipts": [
+      {
+        "id": "rcpt-e2",
+        "event": "e2",
+        "account": "review-proxy",
+        "token": "tok-47",
+        "device": "dev-reviewer-1",
+        "session": "ses-47",
+        "version": "v7",
+        "received_by": ["reviewer-R2"],
+        "at": "2026-04-01T10:00:00Z"
+      }
+    ],
+    "handshakes": [],
+    "investigations": [],
+    "withdrawals": []
+  },
+  "scenarios": {
+    "delegated": {
+      "description": "审校委派原件、代理帐号与设备登记及客户批准的 SRC-47 下载窗口：e2 由指定审校员在有效窗口内操作。",
+      "evidence": {}
+    },
+    "stolen": {
+      "description": "同时间异地设备握手、令牌吊销及审校员否认签收：代理令牌被盗用，按实际下载版本告知并冻结令牌。",
+      "evidence": {
+        "tokens": [
+          {
+            "id": "tok-47",
+            "account": "review-proxy",
+            "delegation": "del-47",
+            "issued_at": "2026-04-01T08:05:00Z",
+            "expires_at": "2026-04-03T18:00:00Z",
+            "revoked_at": "2026-04-01T10:30:00Z",
+            "revoked_reason": "token-theft-report"
+          }
+        ],
+        "devices": [
+          {
+            "id": "dev-reviewer-1",
+            "account": "review-proxy",
+            "site": "office-hk",
+            "registered_at": "2026-03-20T00:00:00Z",
+            "status": "active"
+          },
+          {
+            "id": "dev-remote-9",
+            "account": "review-proxy",
+            "site": "office-hk",
+            "registered_at": "2026-04-01T09:40:00Z",
+            "status": "active"
+          }
+        ],
+        "sessions": [
+          {
+            "id": "ses-47",
+            "account": "review-proxy",
+            "token": "tok-47",
+            "device": "dev-reviewer-1",
+            "started_at": "2026-04-01T08:10:00Z",
+            "ended_at": "2026-04-01T12:00:00Z"
+          },
+          {
+            "id": "ses-stolen",
+            "account": "review-proxy",
+            "token": "tok-47",
+            "device": "dev-remote-9",
+            "started_at": "2026-04-01T09:50:00Z",
+            "ended_at": "2026-04-01T10:20:00Z"
+          }
+        ],
+        "receipts": [
+          {
+            "id": "rcpt-e2",
+            "event": "e2",
+            "account": "review-proxy",
+            "token": "tok-47",
+            "device": "dev-remote-9",
+            "session": "ses-stolen",
+            "version": "v7",
+            "received_by": ["reviewer-R2", "external-drop-7"],
+            "denied_by": "reviewer-R2",
+            "at": "2026-04-01T10:00:00Z"
+          }
+        ],
+        "handshakes": [
+          {
+            "id": "hs-e2",
+            "token": "tok-47",
+            "device": "dev-remote-9",
+            "session": "ses-stolen",
+            "site": "offsite-hotel",
+            "at": "2026-04-01T10:00:00Z"
+          }
+        ]
+      }
+    }
+  }
 }
