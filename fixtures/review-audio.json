@@ -1,5 +1,139 @@
 [
-  {"upload_id":"a1","recorder":"main","samples":"0-95999","codec":"pcm"},
-  {"upload_id":"a2","recorder":"main","samples":"96000-191999","codec":"pcm"},
-  {"upload_id":"a3","recorder":"relay","samples":"96000-191999","codec":"aac"}
+  {
+    "kind": "session",
+    "meeting_id": "M1",
+    "subject": "术语审校会谈",
+    "main_recorder": "main",
+    "expected_samples": "0-287999",
+    "meeting_rate": 48000,
+    "channels": 2,
+    "clock": "主麦设备时钟",
+    "authorized_devices": [
+      {
+        "recorder": "main",
+        "role": "主麦",
+        "fingerprint": "FP-MAIN-001"
+      },
+      {
+        "recorder": "relay",
+        "role": "中转",
+        "fingerprint": "FP-RELAY-002"
+      },
+      {
+        "recorder": "room-backup",
+        "role": "备录",
+        "fingerprint": "FP-ROOM-003"
+      }
+    ],
+    "note": "期望全段 288000 个主麦原始样本；192000-287999 当前未见"
+  },
+  {
+    "upload_id": "a1",
+    "meeting_id": "M1",
+    "kind": "upload",
+    "recorder": "main",
+    "samples": "0-95999",
+    "codec": "pcm",
+    "header": "RIFF/WAVE-PCM",
+    "sample_rate": 48000,
+    "channels": {
+      "left": "0-95999",
+      "right": "0-95999",
+      "sync": "locked"
+    },
+    "rate_changes": [
+      {
+        "at_sample": 48000,
+        "from_rate": 44100,
+        "to_rate": 48000,
+        "note": "录制中途采样率变化，原始样本号不重新编号"
+      }
+    ],
+    "silence": [
+      "2000-2049"
+    ],
+    "seal": {
+      "receipt": "SEAL-A1",
+      "sealer": "主麦封存",
+      "sha256": "seal-a1-sha256",
+      "sealed_at": "2026-11-20T10:00:00Z",
+      "device_fingerprint": "FP-MAIN-001"
+    },
+    "byte_hash": "hash-a1-bytes",
+    "decoded_hash": "hash-a1-decoded"
+  },
+  {
+    "upload_id": "a2",
+    "meeting_id": "M1",
+    "kind": "upload",
+    "recorder": "main",
+    "samples": "96000-191999",
+    "codec": "pcm",
+    "header": "RIFF/WAVE-PCM",
+    "sample_rate": 48000,
+    "channels": {
+      "left": "96000-191999",
+      "right": "96000-191999",
+      "sync": "locked"
+    },
+    "rate_changes": [],
+    "silence": [
+      "120000-120199"
+    ],
+    "seal": {
+      "receipt": "SEAL-A2",
+      "sealer": "主麦封存",
+      "sha256": "seal-a2-sha256",
+      "sealed_at": "2026-11-20T10:02:00Z",
+      "device_fingerprint": "FP-MAIN-001"
+    },
+    "byte_hash": "hash-a2-bytes",
+    "decoded_hash": "hash-a2-decoded"
+  },
+  {
+    "upload_id": "a3",
+    "meeting_id": "M1",
+    "kind": "upload",
+    "recorder": "relay",
+    "samples": "96000-191999",
+    "local_samples": "88200-176399",
+    "codec": "aac",
+    "header": "MP4/AAC-LC",
+    "sample_rate": 44100,
+    "channels": {
+      "left": "88200-176399",
+      "right": "88200-176399",
+      "sync": "locked"
+    },
+    "transcode": {
+      "derived_from": "a2",
+      "source_rate": 48000,
+      "target_rate": 44100,
+      "source_samples": "96000-191999",
+      "anchor_local_sample": 88200,
+      "anchor_meeting_sample": 96000,
+      "note": "上传商把中段 PCM 重采样并转码为 AAC 后重新上报，是同一物理声波"
+    },
+    "rate_changes": [],
+    "seal": {
+      "receipt": "SEAL-A3",
+      "sealer": "中转设备封存",
+      "sha256": "seal-a3-sha256",
+      "sealed_at": "2026-11-20T10:05:00Z",
+      "device_fingerprint": "FP-RELAY-002"
+    },
+    "byte_hash": "hash-a3-bytes",
+    "decoded_hash": "hash-a3-decoded"
+  },
+  {
+    "kind": "legacy_report",
+    "meeting_id": "M1",
+    "report_id": "LEGACY-M1-R1",
+    "status": "完整",
+    "rule": "upload_id 数量 >= 3",
+    "basis": "计数式裁定：仅统计 upload_id 数量，未映射物理采样区间，属错误状态",
+    "issued_at": "2026-11-20T10:10:00Z",
+    "retain": true,
+    "note": "a3 是 a2 的转码重复片，三个上传号实际只覆盖两个主麦采样区间；旧报告必须留痕并被新证书取代"
+  }
 ]
